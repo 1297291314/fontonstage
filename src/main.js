@@ -10,6 +10,5 @@ import utils from './utils'
 const app = createApp(App)
 
 // 添加到全局中
-// app.config.globalProperties.$uilt = utils
 app.provide('$utils', utils)
 app.use(Antd).use(router).use(store).mount('#app')
