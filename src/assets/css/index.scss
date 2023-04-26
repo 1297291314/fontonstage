@@ -1,0 +1,19 @@
+@import 'color.scss';
+@import 'override.scss';
+
+// 这里是公共样式
+
+body {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    color: #000;
+}
+
+.no-select {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
