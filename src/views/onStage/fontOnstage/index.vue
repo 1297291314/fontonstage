@@ -1,6 +1,6 @@
 <template>
 	<div class="font">
-		<a-tabs :activeKey="activeKey">
+		<a-tabs v-model:activeKey="activeKey">
 			<a-tab-pane key="1" tab="现货">
 				 <a-row>
 					<a-col :span="6"><a-button :disabled="responseing" @click="calcClick" class="versionBtn" type="primary">完整版</a-button></a-col>
@@ -16,7 +16,7 @@
 						<a-date-picker v-model:value="day" value-format="YYYYMMDD" />
 					</a-form-item>
 					<a-form-item>
-					 	<a-button type="primary" @click="submit" html-type="submit">Submit</a-button>
+					 	<a-button type="primary" @click="submit" :disabled="!day" html-type="submit">提交</a-button>
 					</a-form-item>
 				  </a-form>
 			</a-tab-pane>
@@ -36,10 +36,18 @@ const calcFlag = ref(false)
 const day = ref('')
 const calcClick = () => {
 	responseing.value = true
-	message.warn('提交成功，正在等待返回结果')
+	message.success({
+        content: () => '请耐心等待返回结果',
+		duration: 10,
+        style: {
+		  fontSize: '16px'
+        },
+      })
 	api.calc()
 		.then((res) =>{
 			calcFlag.value = true
+			message.destroy();
+			message.success(res)
 		})
 		.finally(()=>{
 			responseing.value = false
@@ -47,32 +55,36 @@ const calcClick = () => {
 }
 const afternoonClick = () => {
 	calcFlag.value = false
-	message.warn('提交成功，正在等待返回结果')
+	message.success('请耐心等待返回结果')
 	responseing.value = true
 	api.afternoon()
 		.then((res) =>{
-			console.log(res)
+			message.destroy();
+			message.success(res)
 		}).finally(()=>{
 			responseing.value = false
 		 })
 }
 const checkClick = () => {
 	calcFlag.value = false
-	message.warn('提交成功，正在等待返回结果')
+	message.success('请耐心等待返回结果')
 	responseing.value = true
 	api.checkStock()
 		.then((res) =>{
+			message.destroy();
+			message.success(res)
 		}).finally(()=>{
 			responseing.value = false
 		 })
 }
 const pushClick = () => {
 	calcFlag.value = false
-	message.warn('提交成功，正在等待返回结果')
+	message.success('请耐心等待返回结果')
 	responseing.value = true
 	api.push()
 		.then((res) =>{
-			console.log(res)
+			message.destroy();
+			message.success(res)
 		}).finally(()=>{
 			responseing.value = false
 		 })
@@ -81,7 +93,7 @@ const submit = ()=>{
 	console.log(day.value)
 	api.resetStatus({day:day.value})
 		.then((res) =>{
-			console.log(res)
+			message.success(res)
 		}).finally(()=>{
 
 		 })
