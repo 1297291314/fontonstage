@@ -6,7 +6,7 @@
 					<a-col :span="6"><a-button :disabled="responseing" @click="calcClick" class="versionBtn" type="primary">完整版</a-button></a-col>
 					<a-col :span="6"><a-button :disabled="responseing" @click="afternoonClick" class="versionBtn" type="primary">下午版</a-button></a-col>
 					<a-col :span="6"><a-button :disabled="responseing" @click="checkClick" class="versionBtn" type="primary">check</a-button></a-col>
-					<a-col :span="6"><a-button :disabled="responseing" @click="pushClick" class="versionBtn" type="primary">推送</a-button></a-col>
+					<a-col :span="6"><a-button :disabled="true" @click="pushClick" class="versionBtn" type="primary">推送</a-button></a-col>
 				</a-row>
 				<a-divider v-show="calcFlag">完整版表格</a-divider>
 				  <a-form v-show="calcFlag"
